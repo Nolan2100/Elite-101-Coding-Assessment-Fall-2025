@@ -2,7 +2,7 @@ from library_books import library_books
 from datetime import datetime, timedelta
 
 # -------- Level 1 --------
-# TODO: Create a function to view all books that are currently available
+# A function to view all books that are currently available
 # Output should include book ID, title, and author
 def view_available_books():
     for book in library_books:
@@ -10,7 +10,7 @@ def view_available_books():
             print(f"Book ID: {book['id']}, Book Title: {book['title']}, Book Author: {book['author']}")
 
 # -------- Level 2 --------
-# TODO: Create a function to search books by author OR genre
+# A function to search books by author OR genre
 # Search should be case-insensitive
 # Return a list of matching books
 def search_books():
@@ -20,7 +20,7 @@ def search_books():
             print(book)
 
 # -------- Level 3 --------
-# TODO: Create a function to checkout a book by ID
+# A function to checkout a book by ID
 # If the book is available:
 #   - Mark it unavailable
 #   - Set the due_date to 2 weeks from today
@@ -36,7 +36,7 @@ def checkout():
         if book['id'] == book_id:
             if book['available']:
                 book['available'] = False
-                book['due_date'] = (datetime.now() + timedelta(weeks=2)).strftime("%m-%d-%y")
+                book['due_date'] = (datetime.now() + timedelta(weeks=2)).strftime("%m-%d-%y")#used ai to understand the datetime format
                 book['checkouts'] += 1
                 print(f"Book '{book['title']}' checked out successfully. Due date: {book['due_date']}")
             else:
@@ -45,7 +45,7 @@ def checkout():
     print("Book ID not found.")
 
 # -------- Level 4 --------
-# TODO: Create a function to return a book by ID
+# A function to return a book by ID
 # Set its availability to True and clear the due_date
 def return_book():
     book_id = input("Enter the book ID to return: ").strip()
@@ -63,14 +63,14 @@ def return_book():
             return
     print("Book ID not found.")
 
-# TODO: Create a function to list all overdue books
+# A function to list all overdue books
 # A book is overdue if its due_date is before today AND it is still checked out
 def list_overdue_books():
     today = datetime.now().date()
     for book in library_books:
         if not book['available'] and book['due_date']:
             due_date = datetime.strptime(book['due_date'], "%Y-%m-%d").date()#used ai to understand the datetime format
-            if due_date < today:
+            if due_date < today and book['available'] == False:
                 print(f"Overdue Book ID: {book['id']}, Title: {book['title']}, Due Date: {book['due_date']}")
 
 # -------- Level 5 --------
