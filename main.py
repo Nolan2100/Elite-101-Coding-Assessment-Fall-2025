@@ -36,7 +36,7 @@ def checkout():
         if book['id'] == book_id:
             if book['available']:
                 book['available'] = False
-                book['due_date'] = (datetime.now() + timedelta(weeks=2)).strftime("%Y-%m-%d")
+                book['due_date'] = (datetime.now() + timedelta(weeks=2)).strftime("%m-%d-%y")
                 book['checkouts'] += 1
                 print(f"Book '{book['title']}' checked out successfully. Due date: {book['due_date']}")
             else:
@@ -67,13 +67,11 @@ def return_book():
 # A book is overdue if its due_date is before today AND it is still checked out
 def list_overdue_books():
     today = datetime.now().date()
-    overdue_books = []
     for book in library_books:
         if not book['available'] and book['due_date']:
             due_date = datetime.strptime(book['due_date'], "%Y-%m-%d").date()#used ai to understand the datetime format
             if due_date < today:
-                overdue_books.append(book)
-    print(overdue_books)
+                print(f"Overdue Book ID: {book['id']}, Title: {book['title']}, Due Date: {book['due_date']}")
 
 # -------- Level 5 --------
 # TODO: Convert your data into a Book class with methods like checkout() and return_book()
