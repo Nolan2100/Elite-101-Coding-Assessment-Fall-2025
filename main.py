@@ -7,11 +7,7 @@ from datetime import datetime, timedelta
 def view_available_books():
     for book in library_books:
         if book['available'] == True:
-            print({ 
-                'id': book['id'],
-                'title': book['title'],
-                'author': book['author'],
-            })
+            print(f"Book ID: {book['id']}, Book Title: {book['title']}, Book Author: {book['author']}")
 
 # -------- Level 2 --------
 # TODO: Create a function to search books by author OR genre
@@ -74,7 +70,7 @@ def list_overdue_books():
     overdue_books = []
     for book in library_books:
         if not book['available'] and book['due_date']:
-            due_date = datetime.strptime(book['due_date'], "%Y-%m-%d").date()
+            due_date = datetime.strptime(book['due_date'], "%Y-%m-%d").date()#used ai to understand the datetime format
             if due_date < today:
                 overdue_books.append(book)
     print(overdue_books)
@@ -104,7 +100,7 @@ def menu():
         elif choice == '5':
             list_overdue_books()
         elif choice == '6':
-            print("Exiting the library system. Goodbye!")
+            print("Thanks for using the library system, Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
